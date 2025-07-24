@@ -102,7 +102,7 @@ inputCorner.Parent = rangeInput
 
 rangeInput.FocusLost:Connect(function()
     local value = tonumber(rangeInput.Text)
-    if value and value >= 100 and value <= 5000 then
+    if value and value >= 100 and value <= 99999 then
         espRange = math.floor(value)
     else
         rangeInput.Text = tostring(espRange)
