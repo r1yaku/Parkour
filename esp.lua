@@ -110,7 +110,7 @@ inputCorner.Parent = rangeInput
 
 rangeInput.FocusLost:Connect(function()
     local value = tonumber(rangeInput.Text)
-    if value and value >= 100 and value <= 99999 then
+    if value and value >= 100 and value <= 7000 then
         espRange = math.floor(value)
     else
         rangeInput.Text = tostring(espRange)
@@ -183,7 +183,7 @@ local brickColors = {
     {displayName = "Rare", colorName = "Royal purple"},
     {displayName = "Epic", colorName = "Toothpaste"},
     {displayName = "Legendary", colorName = "Tr. Flu. Yellow"},
-    {displayName = "Ultimate", colorName = "Really red"},
+    {displayName = "Ultimate", colorName = "Really red", filterColor = BrickColor.new("Really black")},
 }
 
 local function isColorSelected(color)
@@ -221,13 +221,14 @@ for i, info in ipairs(brickColors) do
     btn.Font = Enum.Font.SourceSansBold
     btn.Parent = sidePanel
 
+    local filterColor = info.filterColor or BrickColor.new(info.colorName)
+
     btn.MouseButton1Click:Connect(function()
-        local clickedColor = BrickColor.new(info.colorName)
-        if isColorSelected(clickedColor) then
-            removeColor(clickedColor)
+        if isColorSelected(filterColor) then
+            removeColor(filterColor)
             btn.Text = info.displayName
         else
-            addColor(clickedColor)
+            addColor(filterColor)
             btn.Text = info.displayName .. " (Selected)"
         end
     end)
